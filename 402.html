@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamad Asihf | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #080810;
+            --bg-secondary: #0e0e18;
+            --bg-tertiary: #141420;
+            --bg-elevated: #1a1a28;
+            --fg-primary: #f0f0f5;
+            --fg-secondary: #a8a8b8;
+            --fg-muted: #606070;
+            --accent: #00aaff;
+            --accent-bright: #33bbff;
+            --accent-dim: #0077cc;
+            --accent-glow: rgba(0, 170, 255, 0.25);
+            --accent-subtle: rgba(0, 170, 255, 0.08);
+            --card-bg: rgba(20, 20, 32, 0.6);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --danger: #ff4466;
+            --danger-dim: rgba(255, 68, 102, 0.15);
+            --success: #00dd88;
+            --warning: #ffaa00;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.5);
+            --transition-fast: 0.15s ease;
+            --transition-med: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--fg-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Background Effects */
+        .bg-effects { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .gradient-orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.4; }
+        .gradient-orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(0, 100, 200, 0.3) 0%, transparent 70%); top: -200px; left: -200px; animation: orbFloat1 25s ease-in-out infinite; }
+        .gradient-orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(0, 150, 255, 0.2) 0%, transparent 70%); bottom: -100px; right: -100px; animation: orbFloat2 30s ease-in-out infinite; }
+        .gradient-orb-3 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(0, 170, 255, 0.15) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); animation: orbFloat3 20s ease-in-out infinite; }
+        
+        @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(50px, 30px) scale(1.1); } }
+        @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-40px, -20px) scale(1.05); } }
+        @keyframes orbFloat3 { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.15); } }
+
+        .grid-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0, 170, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 170, 255, 0.02) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%); -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%); }
+
+        h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+        .highlight { color: var(--accent); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 40px); }
+        section { position: relative; z-index: 1; padding: 120px 0; }
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .section-tag { display: inline-block; padding: 8px 20px; background: var(--accent-subtle); border: 1px solid rgba(0, 170, 255, 0.2); border-radius: 30px; font-size: 0.85rem; font-weight: 500; color: var(--accent); margin-bottom: 20px; letter-spacing: 0.05em; text-transform: uppercase; }
+        .section-title { font-size: clamp(2.2rem, 5vw, 3.5rem); margin-bottom: 16px; }
+        .section-subtitle { color: var(--fg-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+        .glass { background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--card-border); }
+        .glass-elevated { background: rgba(30, 30, 45, 0.7); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid rgba(255, 255, 255, 0.08); }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 28px; font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; font-weight: 500; border: none; border-radius: var(--radius-md); cursor: pointer; transition: all var(--transition-fast); text-decoration: none; position: relative; overflow: hidden; }
+        .btn::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%); opacity: 0; transition: opacity var(--transition-fast); }
+        .btn:hover::before { opacity: 1; }
+        .btn-primary { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%); color: white; box-shadow: 0 4px 24px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.2); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 40px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.2); }
+        .btn-secondary { background: var(--glass-bg); color: var(--fg-primary); border: 1px solid var(--card-border); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.06); border-color: var(--accent); color: var(--accent); }
+        .btn-danger { background: var(--danger-dim); color: var(--danger); border: 1px solid rgba(255, 68, 102, 0.3); }
+        .btn-danger:hover { background: var(--danger); color: white; }
+        .btn-ghost { background: transparent; color: var(--fg-secondary); padding: 10px 16px; }
+        .btn-ghost:hover { color: var(--accent); background: var(--accent-subtle); }
+        .btn-sm { padding: 10px 18px; font-size: 0.85rem; }
+        .btn-icon { width: 44px; height: 44px; padding: 0; border-radius: var(--radius-md); }
+
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 16px 0; background: rgba(8, 8, 16, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); transition: all var(--transition-fast); }
+        nav.scrolled { padding: 12px 0; background: rgba(8, 8, 16, 0.95); }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; background: linear-gradient(135deg, var(--fg-primary) 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-links { display: flex; gap: 8px; list-style: none; }
+        .nav-links a { color: var(--fg-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 10px 18px; border-radius: var(--radius-sm); transition: all var(--transition-fast); position: relative; }
+        .nav-links a:hover { color: var(--fg-primary); background: var(--glass-bg); }
+        .nav-links a.active { color: var(--accent); }
+        .mobile-toggle { display: none; background: none; border: none; color: var(--fg-primary); cursor: pointer; padding: 8px; }
+
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 100px; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .hero-content { animation: fadeSlideUp 1s ease forwards; }
+        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--accent-subtle); border: 1px solid rgba(0, 170, 255, 0.2); border-radius: 30px; font-size: 0.85rem; color: var(--accent); margin-bottom: 24px; }
+        .hero-badge::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+        .hero-name { font-size: clamp(3rem, 7vw, 5rem); font-weight: 700; margin-bottom: 8px; background: linear-gradient(135deg, var(--fg-primary) 0%, var(--fg-secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-title { font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--accent); margin-bottom: 24px; font-weight: 500; }
+        .hero-intro { font-size: 1.15rem; color: var(--fg-secondary); margin-bottom: 36px; max-width: 520px; line-height: 1.8; }
+        .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
+        .social-links { display: flex; gap: 12px; }
+        .social-link { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; background: var(--glass-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md); color: var(--fg-secondary); text-decoration: none; transition: all var(--transition-fast); }
+        .social-link:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-subtle); transform: translateY(-4px); }
+        .social-link svg { width: 22px; height: 22px; }
+        .hero-visual { display: flex; justify-content: center; align-items: center; animation: fadeSlideUp 1s ease 0.2s forwards; opacity: 0; }
+        .profile-wrapper { position: relative; width: 340px; height: 340px; }
+        .profile-ring { position: absolute; top: -15px; left: -15px; right: -15px; bottom: -15px; border: 2px solid var(--accent); border-radius: 50%; opacity: 0.2; animation: ringPulse 4s ease-in-out infinite; }
+        .profile-ring:nth-child(2) { top: -30px; left: -30px; right: -30px; bottom: -30px; opacity: 0.1; animation-delay: 1s; }
+        @keyframes ringPulse { 0%, 100% { transform: scale(1); opacity: 0.2; } 50% { transform: scale(1.05); opacity: 0.05; } }
+        .profile-photo { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 4px solid var(--accent); box-shadow: 0 0 80px var(--accent-glow); cursor: pointer; transition: all var(--transition-med); position: relative; z-index: 2; }
+        .profile-photo:hover { box-shadow: 0 0 100px var(--accent-glow); }
+        .profile-glow { position: absolute; top: 50%; left: 50%; width: 80%; height: 80%; transform: translate(-50%, -50%); background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%); filter: blur(40px); z-index: 1; }
+
+        /* About */
+        .about-content { max-width: 900px; margin: 0 auto; }
+        .about-card { padding: 48px; border-radius: var(--radius-xl); position: relative; }
+        .about-text { font-size: 1.2rem; color: var(--fg-secondary); line-height: 1.9; }
+        .about-text p { margin-bottom: 20px; }
+        .about-text p:last-child { margin-bottom: 0; }
+
+        /* Education Timeline */
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 3px; height: 100%; background: linear-gradient(180deg, var(--accent) 0%, var(--accent-dim) 50%, transparent 100%); border-radius: 2px; }
+        .timeline-item { position: relative; width: 50%; padding: 0 50px 60px; }
+        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+        .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+        .timeline-marker { position: absolute; width: 20px; height: 20px; background: var(--bg-primary); border: 3px solid var(--accent); border-radius: 50%; top: 8px; z-index: 2; box-shadow: 0 0 20px var(--accent-glow); }
+        .timeline-item:nth-child(odd) .timeline-marker { right: -10px; }
+        .timeline-item:nth-child(even) .timeline-marker { left: -10px; }
+        .timeline-card { padding: 28px; border-radius: var(--radius-lg); position: relative; transition: all var(--transition-med); }
+        .timeline-card:hover { transform: translateY(-4px); border-color: rgba(0, 170, 255, 0.3); }
+        .timeline-type { display: inline-block; padding: 6px 14px; background: var(--accent-subtle); border-radius: 20px; font-size: 0.8rem; font-weight: 600; color: var(--accent); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .timeline-card h3 { font-size: 1.3rem; margin-bottom: 8px; }
+        .timeline-institution { color: var(--fg-secondary); font-size: 1rem; margin-bottom: 16px; }
+        .timeline-grades { display: flex; flex-wrap: wrap; gap: 10px; }
+        .timeline-item:nth-child(odd) .timeline-grades { justify-content: flex-end; }
+        .grade-tag { padding: 6px 14px; background: var(--glass-bg); border: 1px solid var(--card-border); border-radius: var(--radius-sm); font-size: 0.85rem; }
+        .grade-tag span { color: var(--accent); font-weight: 600; }
+
+        /* Skills */
+        .skills-categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
+        .skill-category { padding: 32px; border-radius: var(--radius-lg); transition: all var(--transition-med); }
+        .skill-category:hover { border-color: rgba(0, 170, 255, 0.2); }
+        .category-header { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+        .category-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--accent-subtle); border-radius: var(--radius-md); color: var(--accent); }
+        .category-icon svg { width: 24px; height: 24px; }
+        .category-title { font-size: 1.2rem; font-weight: 600; }
+        .skill-list { display: flex; flex-direction: column; gap: 18px; }
+        .skill-item { position: relative; }
+        .skill-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .skill-name { font-weight: 500; color: var(--fg-primary); }
+        .skill-percent { font-weight: 600; color: var(--accent); font-size: 0.9rem; }
+        .skill-bar { height: 8px; background: var(--glass-bg); border-radius: 4px; overflow: hidden; position: relative; }
+        .skill-fill { height: 100%; background: linear-gradient(90deg, var(--accent) 0%, var(--accent-bright) 100%); border-radius: 4px; width: 0; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
+        .skill-fill::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%); animation: shimmer 2s infinite; }
+        @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+        /* Projects */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 32px; }
+        .project-card { border-radius: var(--radius-xl); overflow: hidden; transition: all var(--transition-med); position: relative; }
+        .project-card:hover { transform: translateY(-8px); border-color: rgba(0, 170, 255, 0.3); box-shadow: var(--shadow-lg); }
+        .project-image { width: 100%; height: 220px; object-fit: cover; border-bottom: 1px solid var(--card-border); }
+        .project-placeholder { width: 100%; height: 220px; background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--card-border); }
+        .project-placeholder svg { width: 56px; height: 56px; color: var(--fg-muted); opacity: 0.5; }
+        .project-body { padding: 28px; }
+        .project-title { font-size: 1.4rem; margin-bottom: 12px; }
+        .project-desc { color: var(--fg-secondary); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.7; }
+        .project-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .tech-tag { padding: 6px 14px; background: var(--accent-subtle); border-radius: 20px; font-size: 0.8rem; color: var(--accent); font-weight: 500; }
+        .project-link { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: all var(--transition-fast); }
+        .project-link:hover { gap: 12px; }
+
+        /* Achievements */
+        .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto; }
+        .achievement-card { padding: 28px; border-radius: var(--radius-lg); display: flex; gap: 20px; transition: all var(--transition-med); }
+        .achievement-card:hover { border-color: rgba(0, 170, 255, 0.3); transform: translateY(-4px); }
+        .achievement-icon { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%); border-radius: var(--radius-md); flex-shrink: 0; box-shadow: 0 4px 20px var(--accent-glow); }
+        .achievement-icon svg { width: 28px; height: 28px; color: white; }
+        .achievement-content h4 { font-size: 1.15rem; margin-bottom: 8px; }
+        .achievement-content p { color: var(--fg-secondary); font-size: 0.95rem; }
+
+        /* Contact */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1000px; margin: 0 auto; }
+        .contact-info h3 { font-size: 1.8rem; margin-bottom: 16px; }
+        .contact-info p { color: var(--fg-secondary); margin-bottom: 32px; font-size: 1.05rem; }
+        .contact-links { display: flex; flex-direction: column; gap: 16px; }
+        .contact-item { display: flex; align-items: center; gap: 16px; padding: 18px 24px; border-radius: var(--radius-md); text-decoration: none; color: var(--fg-primary); transition: all var(--transition-fast); }
+        .contact-item:hover { border-color: var(--accent); background: var(--accent-subtle); }
+        .contact-item svg { width: 24px; height: 24px; color: var(--accent); flex-shrink: 0; }
+        .contact-item span { color: var(--fg-secondary); }
+        .contact-form-card { padding: 40px; border-radius: var(--radius-xl); }
+
+        /* Edit Controls */
+        .edit-controls { display: none; position: absolute; top: 16px; right: 16px; gap: 8px; z-index: 10; }
+        .admin-mode .edit-controls { display: flex; }
+        .edit-btn { width: 36px; height: 36px; border-radius: var(--radius-sm); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all var(--transition-fast); }
+        .edit-btn svg { width: 16px; height: 16px; }
+        .edit-btn-edit { background: var(--accent-subtle); color: var(--accent); }
+        .edit-btn-edit:hover { background: var(--accent); color: white; }
+        .edit-btn-delete { background: var(--danger-dim); color: var(--danger); }
+        .edit-btn-delete:hover { background: var(--danger); color: white; }
+        .admin-mode .glass, .admin-mode .glass-elevated, .admin-mode .timeline-card, .admin-mode .skill-category, .admin-mode .project-card, .admin-mode .achievement-card, .admin-mode .about-card, .admin-mode .contact-form-card { position: relative; }
+        .add-section { display: none; text-align: center; margin-top: 40px; }
+        .admin-mode .add-section { display: block; }
+
+        /* Admin Panel */
+        .admin-panel { position: fixed; bottom: 28px; right: 28px; z-index: 1000; display: none; }
+        .admin-panel.active { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+        .admin-menu { background: var(--bg-elevated); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 12px; display: none; flex-direction: column; gap: 8px; min-width: 200px; box-shadow: var(--shadow-lg); }
+        .admin-menu.show { display: flex; }
+        .admin-fab { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%); border: none; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px var(--accent-glow); transition: all var(--transition-fast); }
+        .admin-fab:hover { transform: scale(1.1); box-shadow: 0 8px 32px var(--accent-glow); }
+        .admin-fab svg { width: 28px; height: 28px; }
+
+        /* Modal */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 24px; }
+        .modal-overlay.show { display: flex; }
+        .modal { background: var(--bg-secondary); border: 1px solid var(--card-border); border-radius: var(--radius-xl); padding: 40px; max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto; animation: modalIn 0.3s ease; box-shadow: var(--shadow-lg); }
+        @keyframes modalIn { from { opacity: 0; transform: translateY(30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .modal h2 { font-size: 1.6rem; margin-bottom: 24px; }
+        .modal-input { width: 100%; padding: 16px 20px; background: var(--bg-tertiary); border: 1px solid var(--card-border); border-radius: var(--radius-md); color: var(--fg-primary); font-size: 1rem; margin-bottom: 16px; transition: all var(--transition-fast); font-family: inherit; }
+        .modal-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
+        .modal-input::placeholder { color: var(--fg-muted); }
+        .modal-textarea { min-height: 140px; resize: vertical; line-height: 1.6; }
+        .modal-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a8a8b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 48px; }
+        .modal-buttons { display: flex; gap: 12px; justify-content: flex-end; margin-top: 28px; }
+        .file-upload { position: relative; margin-bottom: 16px; }
+        .file-upload input[type="file"] { display: none; }
+        .file-upload-label { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 24px; background: var(--bg-tertiary); border: 2px dashed var(--card-border); border-radius: var(--radius-md); cursor: pointer; transition: all var(--transition-fast); color: var(--fg-secondary); }
+        .file-upload-label:hover { border-color: var(--accent); color: var(--accent); }
+        .image-preview { width: 100%; max-height: 200px; object-fit: cover; border-radius: var(--radius-md); margin-bottom: 16px; display: none; }
+        .grades-editor { background: var(--bg-tertiary); border-radius: var(--radius-md); padding: 16px; margin-bottom: 16px; }
+        .grades-editor h4 { font-size: 0.9rem; margin-bottom: 12px; color: var(--fg-secondary); }
+        .grade-entry { display: flex; gap: 10px; margin-bottom: 10px; }
+        .grade-entry:last-child { margin-bottom: 0; }
+
+        footer { position: relative; z-index: 1; padding: 40px 0; border-top: 1px solid var(--card-border); text-align: center; }
+        footer p { color: var(--fg-muted); font-size: 0.9rem; }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 60px; text-align: center; }
+            .hero-intro { margin: 0 auto 36px; }
+            .hero-actions { justify-content: center; }
+            .social-links { justify-content: center; }
+            .hero-visual { order: -1; }
+            .profile-wrapper { width: 280px; height: 280px; }
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 80px 0; }
+            .section-header { margin-bottom: 50px; }
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-secondary); flex-direction: column; padding: 20px; gap: 4px; border-bottom: 1px solid var(--card-border); }
+            .nav-links.show { display: flex; }
+            .mobile-toggle { display: block; }
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 100%; padding-left: 60px; padding-right: 0; text-align: left; }
+            .timeline-item:nth-child(odd), .timeline-item:nth-child(even) { left: 0; text-align: left; }
+            .timeline-item:nth-child(odd) .timeline-marker, .timeline-item:nth-child(even) .timeline-marker { left: 10px; right: auto; }
+            .timeline-item:nth-child(odd) .timeline-grades { justify-content: flex-start; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .skills-categories { grid-template-columns: 1fr; }
+            .achievements-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .profile-wrapper { width: 220px; height: 220px; }
+            .hero-name { font-size: 2.4rem; }
+            .about-card { padding: 28px; }
+            .modal { padding: 28px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effects">
+        <div class="gradient-orb gradient-orb-1"></div>
+        <div class="gradient-orb gradient-orb-2"></div>
+        <div class="gradient-orb gradient-orb-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <nav id="navbar">
+        <div class="container">
+            <a href="#home" class="logo">MA</a>
+            <button class="mobile-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">Available for opportunities</div>
+                    <h1 class="hero-name" id="hero-name">Mohamad Asihf</h1>
+                    <div class="hero-title" id="hero-title">MTech Software Engineering | VIT University | CGPA 7.0</div>
+                    <p class="hero-intro" id="hero-intro">Passionate about building intelligent and secure systems using Java and modern technologies. Focused on continuous improvement and real-world problem solving.</p>
+                    <div class="hero-actions">
+                        <a href="#" class="btn btn-primary" id="resume-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Download Resume
+                        </a>
+                        <button class="btn btn-secondary btn-icon" onclick="editHero()" id="hero-edit-btn" style="display: none;" aria-label="Edit hero">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link" id="github-link" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" id="linkedin-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="profile-wrapper">
+                        <div class="profile-ring"></div>
+                        <div class="profile-ring"></div>
+                        <div class="profile-glow"></div>
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23141420' width='100' height='100'/%3E%3Ccircle cx='50' cy='35' r='22' fill='%232a2a3a'/%3E%3Cellipse cx='50' cy='85' rx='38' ry='28' fill='%232a2a3a'/%3E%3C/svg%3E" alt="Mohamad Asihf" class="profile-photo" id="profile-photo" onclick="handlePhotoClick()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">About Me</span>
+                <h2 class="section-title">Who I Am</h2>
+            </div>
+            <div class="about-content reveal">
+                <div class="about-card glass-elevated">
+                    <div class="edit-controls">
+                        <button class="edit-btn edit-btn-edit" onclick="editAbout()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                    </div>
+                    <div class="about-text" id="about-text">
+                        <p>I am <strong>Mohamad Asihf S</strong>, currently pursuing my <strong>Master of Technology (M.Tech Int) in Software Engineering</strong> at <strong>VIT University</strong> with a CGPA of 7.0. I specialize in Java backend development and have a keen interest in building intelligent systems using modern technologies like Spring Boot and AI integration.</p>
+                        <p>I focus on strengthening core computer science fundamentals and backend development skills through practical projects and consistent improvement. My goal is to create impactful software solutions that address real-world challenges.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Education</span>
+                <h2 class="section-title">Academic Journey</h2>
+                <p class="section-subtitle">My educational background and academic achievements</p>
+            </div>
+            <div class="timeline" id="education-timeline">
+                <!-- Rendered by JS -->
+            </div>
+            <div class="add-section">
+                <button class="btn btn-secondary" onclick="addEducation()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    Add Education
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Skills</span>
+                <h2 class="section-title">Technical Expertise</h2>
+                <p class="section-subtitle">Technologies and tools I work with</p>
+            </div>
+            <div class="skills-categories" id="skills-container">
+                <!-- Rendered by JS -->
+            </div>
+            <div class="add-section">
+                <button class="btn btn-secondary" onclick="addSkill()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    Add Skill
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Projects</span>
+                <h2 class="section-title">Featured Work</h2>
+                <p class="section-subtitle">Some projects I've built and contributed to</p>
+            </div>
+            <div class="projects-grid" id="projects-grid">
+                <!-- Rendered by JS -->
+            </div>
+            <div class="add-section">
+                <button class="btn btn-secondary" onclick="addProject()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    Add Project
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Achievements</span>
+                <h2 class="section-title">Recognition & Milestones</h2>
+            </div>
+            <div class="achievements-grid" id="achievements-grid">
+                <!-- Rendered by JS -->
+            </div>
+            <div class="add-section">
+                <button class="btn btn-secondary" onclick="addAchievement()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    Add Achievement
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Contact</span>
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Feel free to reach out for collaborations or opportunities</p>
+            </div>
+            <div class="contact-grid reveal">
+                <div class="contact-info">
+                    <h3>Let's Connect</h3>
+                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+                    <div class="contact-links" id="contact-links">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+                <div class="contact-form-card glass-elevated">
+                    <div class="edit-controls">
+                        <button class="edit-btn edit-btn-edit" onclick="editContact()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                    </div>
+                    <div id="contact-display">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Designed & Built by Mohamad Asihf</p>
+        </div>
+    </footer>
+
+    <div class="admin-panel" id="admin-panel">
+        <div class="admin-menu" id="admin-menu">
+            <button class="btn btn-primary btn-sm" onclick="saveAllData()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                Save Changes
+            </button>
+            <button class="btn btn-danger btn-sm" onclick="logout()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                Logout
+            </button>
+        </div>
+        <button class="admin-fab" onclick="toggleAdminMenu()" aria-label="Admin panel">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"></path></svg>
+        </button>
+    </div>
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal" id="modal">
+            <h2 id="modal-title">Modal Title</h2>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        // =====================
+        // DEFAULT DATA - UPDATED WITH RESUME DETAILS
+        // =====================
+        const defaultData = {
+            hero: {
+                name: 'Mohamad Asihf',
+                title: 'MTech Software Engineering | VIT University | CGPA 7.0',
+                intro: 'Passionate about building intelligent and secure systems using Java and modern technologies. Focused on continuous improvement and real-world problem solving.',
+                resumeLink: '#',
+                githubLink: 'https://github.com',
+                linkedinLink: 'https://www.linkedin.com/in/mohamad-asihf-765a63320/',
+                profilePhoto: ''
+            },
+            about: 'I am Mohamad Asihf S, currently pursuing my Master of Technology (M.Tech Int) in Software Engineering at VIT University with a CGPA of 7.0. I specialize in Java backend development and have a keen interest in building intelligent systems using modern technologies like Spring Boot and AI integration.\n\nI focus on strengthening core computer science fundamentals and backend development skills through practical projects and consistent improvement. My goal is to create impactful software solutions that address real-world challenges.',
+            education: [
+                {
+                    id: 1,
+                    type: 'college',
+                    institution: 'VIT University, Vellore',
+                    grades: [
+                        { label: 'Degree', value: 'M.Tech Software Engineering' },
+                        { label: 'CGPA', value: '7.0' },
+                        { label: 'Status', value: '2024 - Pursuing' }
+                    ]
+                },
+                {
+                    id: 2,
+                    type: 'school',
+                    institution: 'Vidya Mandir Matriculation Higher Secondary School',
+                    grades: [
+                        { label: 'Grade 10', value: '75%' },
+                        { label: 'Grade 11', value: '74%' },
+                        { label: 'Grade 12', value: '85%' }
+                    ]
+                }
+            ],
+            skills: {
+                programming: {
+                    title: 'Programming Languages',
+                    icon: 'code',
+                    items: [
+                        { id: 1, name: 'Java', percentage: 90 },
+                        { id: 2, name: 'JavaScript', percentage: 80 },
+                        { id: 3, name: 'Python', percentage: 75 }
+                    ]
+                },
+                backend: {
+                    title: 'Backend & Database',
+                    icon: 'cpu',
+                    items: [
+                        { id: 4, name: 'Spring Boot', percentage: 88 },
+                        { id: 5, name: 'Spring AI', percentage: 78 },
+                        { id: 6, name: 'MongoDB', percentage: 82 },
+                        { id: 7, name: 'MySQL', percentage: 80 }
+                    ]
+                },
+                tools: {
+                    title: 'Frontend & Tools',
+                    icon: 'tool',
+                    items: [
+                        { id: 8, name: 'React', percentage: 85 },
+                        { id: 9, name: 'HTML/CSS', percentage: 88 },
+                        { id: 10, name: 'Git & GitHub', percentage: 90 },
+                        { id: 11, name: 'VS Code', percentage: 92 }
+                    ]
+                }
+            },
+            projects: [
+                {
+                    id: 1,
+                    title: 'Fire Extinguisher Monitoring App',
+                    description: 'Developed an intelligent monitoring system capable of continuously detecting the CO₂ level inside a fire extinguisher to ensure it remains sufficiently filled. The system triggers an automatic alert to the central controller when CO₂ levels fall below the required threshold. Additionally, it incorporates a fire-detection module that identifies fire incidents in real time and sends notifications indicating the exact location.',
+                    technologies: ['HTML', 'CSS', 'JavaScript', 'Spring', 'MongoDB'],
+                    githubLink: 'https://github.com',
+                    image: ''
+                },
+                {
+                    id: 2,
+                    title: 'Smart Biometric Classroom System',
+                    description: 'An intelligent classroom automation system using biometric authentication for attendance tracking and automated resource management.',
+                    technologies: ['Java', 'Biometrics', 'IoT', 'MySQL'],
+                    githubLink: 'https://github.com',
+                    image: ''
+                },
+                {
+                    id: 3,
+                    title: 'Java TCP/UDP Image Transfer System',
+                    description: 'Network application implementing both TCP and UDP protocols for efficient image transfer with performance comparison.',
+                    technologies: ['Java', 'Networking', 'TCP/UDP', 'Multithreading'],
+                    githubLink: 'https://github.com',
+                    image: ''
+                }
+            ],
+            achievements: [
+                {
+                    id: 1,
+                    title: 'Fire Safety Innovation',
+                    description: 'Developed an intelligent fire extinguisher monitoring system with real-time alerts and location-based fire detection.'
+                },
+                {
+                    id: 2,
+                    title: 'Academic Excellence',
+                    description: 'Pursuing MTech in Software Engineering at VIT University with consistent academic performance and focus on backend technologies.'
+                }
+            ],
+            contact: {
+                email: 'asihfibrahim600@gmail.com',
+                phone: '+91 9677988241',
+                github: 'https://github.com',
+                linkedin: 'https://www.linkedin.com/in/mohamad-asihf-765a63320/'
+            }
+        };
+
+        let portfolioData = null;
+        let isAdminMode = false;
+        let photoClickCount = 0;
+        let photoClickTimer = null;
+        let nextId = 100;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            renderAll();
+            setupScrollEffects();
+            setupNavScroll();
+        });
+
+        function loadData() {
+            const savedData = localStorage.getItem('portfolioData');
+            if (savedData) {
+                portfolioData = JSON.parse(savedData);
+            } else {
+                portfolioData = JSON.parse(JSON.stringify(defaultData));
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('portfolioData', JSON.stringify(portfolioData));
+        }
+
+        function renderAll() {
+            renderHero();
+            renderAbout();
+            renderEducation();
+            renderSkills();
+            renderProjects();
+            renderAchievements();
+            renderContact();
+        }
+
+        function renderHero() {
+            document.getElementById('hero-name').textContent = portfolioData.hero.name;
+            document.getElementById('hero-title').textContent = portfolioData.hero.title;
+            document.getElementById('hero-intro').textContent = portfolioData.hero.intro;
+            document.getElementById('resume-btn').href = portfolioData.hero.resumeLink;
+            document.getElementById('github-link').href = portfolioData.hero.githubLink;
+            document.getElementById('linkedin-link').href = portfolioData.hero.linkedinLink;
+            
+            if (portfolioData.hero.profilePhoto) {
+                document.getElementById('profile-photo').src = portfolioData.hero.profilePhoto;
+            }
+        }
+
+        function renderAbout() {
+            const aboutText = document.getElementById('about-text');
+            aboutText.innerHTML = portfolioData.about.split('\n').map(p => `<p>${p}</p>`).join('');
+        }
+
+        function renderEducation() {
+            const timeline = document.getElementById('education-timeline');
+            timeline.innerHTML = portfolioData.education.map((edu, index) => `
+                <div class="timeline-item reveal" data-id="${edu.id}">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-card glass-elevated">
+                        <div class="edit-controls">
+                            <button class="edit-btn edit-btn-edit" onclick="editEducation(${edu.id})">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                            </button>
+                            <button class="edit-btn edit-btn-delete" onclick="deleteEducation(${edu.id})">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path></svg>
+                            </button>
+                        </div>
+                        <span class="timeline-type">${edu.type === 'school' ? 'High School' : 'University'}</span>
+                        <h3>${edu.type === 'school' ? 'Secondary Education' : 'Higher Education'}</h3>
+                        <div class="timeline-institution">${edu.institution}</div>
+                        ${edu.grades.length > 0 ? `
+                            <div class="timeline-grades">
+                                ${edu.grades.map(g => `<span class="grade-tag">${g.label}: <span>${g.value}</span></span>`).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+            
+            setupScrollEffects();
+        }
+
+        function renderSkills() {
+            const container = document.getElementById('skills-container');
+            const categories = Object.entries(portfolioData.skills);
+            
+            container.innerHTML = categories.map(([key, category]) => `
+                <div class="skill-category glass-elevated reveal" data-category="${key}">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            ${getCategoryIcon(category.icon)}
+                        </div>
+                        <h3 class="category-title">${category.title}</h3>
+                    </div>
+                    <div class="skill-list">
+                        ${category.items.map(skill => `
+                            <div class="skill-item" data-id="${skill.id}">
+                                <div class="edit-controls" style="top: -4px; right: 0;">
+                                    <button class="edit-btn edit-btn-edit" onclick="editSkill('${key}', ${skill.id})">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                                    </button>
+                                    <button class="edit-btn edit-btn-delete" onclick="deleteSkill('${key}', ${skill.id})">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path></svg>
+                                    </button>
+                                </div>
+                                <div class="skill-header">
+                                    <span class="skill-name">${skill.name}</span>
+                                    <span class="skill-percent">${skill.percentage}%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-fill" data-percentage="${skill.percentage}"></div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+            
+            setTimeout(animateSkillBars, 100);
+            setupScrollEffects();
+        }
+
+        function getCategoryIcon(iconName) {
+            const icons = {
+                code: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>',
+                cpu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>',
+                tool: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"></path></svg>'
+            };
+            return icons[iconName] || icons.code;
+        }
+
+        function animateSkillBars() {
+            document.querySelectorAll('.skill-fill').forEach(bar => {
+                const percentage = bar.dataset.percentage;
+                bar.style.width = percentage + '%';
+            });
+        }
+
+        function renderProjects() {
+            const grid = document.getElementById('projects-grid');
+            grid.innerHTML = portfolioData.projects.map(project => `
+                <div class="project-card glass-elevated reveal" data-id="${project.id}">
+                    <div class="edit-controls">
+                        <button class="edit-btn edit-btn-edit" onclick="editProject(${project.id})">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="edit-btn edit-btn-delete" onclick="deleteProject(${project.id})">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path></svg>
+                        </button>
+                    </div>
+                    ${project.image ? 
+                        `<img src="${project.image}" alt="${project.title}" class="project-image">` :
+                        `<div class="project-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        </div>`
+                    }
+                    <div class="project-body">
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-desc">${project.description}</p>
+                        <div class="project-tech">
+                            ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                        </div>
+                        <a href="${project.githubLink}" target="_blank" class="project-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"></path></svg>
+                            View on GitHub
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+            
+            setupScrollEffects();
+        }
+
+        function renderAchievements() {
+            const grid = document.getElementById('achievements-grid');
+            grid.innerHTML = portfolioData.achievements.map(achievement => `
+                <div class="achievement-card glass-elevated reveal" data-id="${achievement.id}">
+                    <div class="edit-controls">
+                        <button class="edit-btn edit-btn-edit" onclick="editAchievement(${achievement.id})">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="edit-btn edit-btn-delete" onclick="deleteAchievement(${achievement.id})">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path></svg>
+                        </button>
+                    </div>
+                    <div class="achievement-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"></path></svg>
+                    </div>
+                    <div class="achievement-content">
+                        <h4>${achievement.title}</h4>
+                        <p>${achievement.description}</p>
+                    </div>
+                </div>
+            `).join('');
+            
+            setupScrollEffects();
+        }
+
+        function renderContact() {
+            const links = document.getElementById('contact-links');
+            const display = document.getElementById('contact-display');
+            
+            links.innerHTML = `
+                <a href="mailto:${portfolioData.contact.email}" class="contact-item glass">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <div>
+                        <div style="font-weight: 500;">Email</div>
+                        <span>${portfolioData.contact.email}</span>
+                    </div>
+                </a>
+                <a href="tel:${portfolioData.contact.phone}" class="contact-item glass">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path></svg>
+                    <div>
+                        <div style="font-weight: 500;">Phone</div>
+                        <span>${portfolioData.contact.phone}</span>
+                    </div>
+                </a>
+                <a href="${portfolioData.contact.github}" target="_blank" class="contact-item glass">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    <div>
+                        <div style="font-weight: 500;">GitHub</div>
+                        <span>${portfolioData.contact.github}</span>
+                    </div>
+                </a>
+                <a href="${portfolioData.contact.linkedin}" target="_blank" class="contact-item glass">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    <div>
+                        <div style="font-weight: 500;">LinkedIn</div>
+                        <span>${portfolioData.contact.linkedin}</span>
+                    </div>
+                </a>
+            `;
+            
+            display.innerHTML = `
+                <p style="color: var(--fg-secondary); margin-bottom: 16px;">
+                    <strong style="color: var(--fg-primary);">Email:</strong><br>
+                    <a href="mailto:${portfolioData.contact.email}" style="color: var(--accent); text-decoration: none;">${portfolioData.contact.email}</a>
+                </p>
+                <p style="color: var(--fg-secondary); margin-bottom: 16px;">
+                    <strong style="color: var(--fg-primary);">Phone:</strong><br>
+                    <a href="tel:${portfolioData.contact.phone}" style="color: var(--accent); text-decoration: none;">${portfolioData.contact.phone}</a>
+                </p>
+                <p style="color: var(--fg-secondary); margin-bottom: 16px;">
+                    <strong style="color: var(--fg-primary);">GitHub:</strong><br>
+                    <a href="${portfolioData.contact.github}" target="_blank" style="color: var(--accent); text-decoration: none;">${portfolioData.contact.github}</a>
+                </p>
+                <p style="color: var(--fg-secondary);">
+                    <strong style="color: var(--fg-primary);">LinkedIn:</strong><br>
+                    <a href="${portfolioData.contact.linkedin}" target="_blank" style="color: var(--accent); text-decoration: none;">${portfolioData.contact.linkedin}</a>
+                </p>
+            `;
+        }
+
+        function setupScrollEffects() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => { entry.target.classList.add('visible'); }, index * 80);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        function setupNavScroll() {
+            window.addEventListener('scroll', () => {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) { navbar.classList.add('scrolled'); } else { navbar.classList.remove('scrolled'); }
+            });
+        }
+
+        function toggleMobileMenu() { document.getElementById('nav-links').classList.toggle('show'); }
+
+        function handlePhotoClick() {
+            photoClickCount++;
+            if (photoClickTimer) { clearTimeout(photoClickTimer); }
+            photoClickTimer = setTimeout(() => { photoClickCount = 0; }, 2000);
+            if (photoClickCount >= 3) { photoClickCount = 0; checkAdminAccess(); }
+        }
+
+        async function checkAdminAccess() {
+            const storedHash = localStorage.getItem('adminPasswordHash');
+            if (!storedHash) { showCreatePasswordModal(); } else { showLoginModal(); }
+        }
+
+        function showCreatePasswordModal() {
+            showModal('Create Admin Password', `
+                <p style="color: var(--fg-secondary); margin-bottom: 24px;">Set up a password to enable admin editing mode.</p>
+                <input type="password" id="new-password" class="modal-input" placeholder="Enter new password (min 6 characters)">
+                <input type="password" id="confirm-password" class="modal-input" placeholder="Confirm password">
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" onclick="hideModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="createPassword()">Create Password</button>
+                </div>
+            `);
+        }
+
+        async function createPassword() {
+            const password = document.getElementById('new-password').value;
+            const confirm = document.getElementById('confirm-password').value;
+            if (!password || password.length < 6) { alert('Password must be at least 6 characters'); return; }
+            if (password !== confirm) { alert('Passwords do not match'); return; }
+            const hash = await hashPassword(password);
+            localStorage.setItem('adminPasswordHash', hash);
+            hideModal();
+            enableAdminMode();
+        }
+
+        function showLoginModal() {
+            showModal('Admin Login', `
+                <p style="color: var(--fg-secondary); margin-bottom: 24px;">Enter your admin password to enable editing.</p>
+                <input type="password" id="login-password" class="modal-input" placeholder="Enter password" autofocus>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" onclick="hideModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="login()">Login</button>
+                </div>
+            `);
+        }
+
+        async function login() {
+            const password = document.getElementById('login-password').value;
+            const storedHash = localStorage.getItem('adminPasswordHash');
+            const inputHash = await hashPassword(password);
+            if (inputHash === storedHash) { hideModal(); enableAdminMode(); } else { alert('Incorrect password'); }
+        }
+
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        function enableAdminMode() {
+            isAdminMode = true;
+            document.body.classList.add('admin-mode');
+            document.getElementById('admin-panel').classList.add('active');
+            document.getElementById('hero-edit-btn').style.display = 'inline-flex';
+        }
+
+        function logout() {
+            isAdminMode = false;
+            document.body.classList.remove('admin-mode');
+            document.getElementById('admin-panel').classList.remove('active');
+            document.getElementById('admin-menu').classList.remove('show');
+            document.getElementById('hero-edit-btn').style.display = 'none';
+        }
+
+        function toggleAdminMenu() { document.getElementById('admin-menu').classList.toggle('show'); }
+
+        function showModal(title, content) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-content').innerHTML = content;
+            document.getElementById('modal-overlay').classList.add('show');
+        }
+
+        function hideModal() { document.getElementById('modal-overlay').classList.remove('show'); }
+
+        document.getElementById('modal-overlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('modal-overlay')) { hideModal(); }
+        });
+
+        // Hero Edit
+        function editHero() {
+            showModal('Edit Hero Section', `
+                <input type="text" id="edit-name" class="modal-input" value="${portfolioData.hero.name}" placeholder="Name">
+                <input type="text" id="edit-title" class="modal-input" value="${portfolioData.hero.title}" placeholder="Title">
+                <textarea id="edit-intro" class="modal-input modal-textarea" placeholder="Introduction">${portfolioData.hero.intro}</textarea>
+                <input type="text" id="edit-resume" class="modal-input" value="${portfolioData.hero.resumeLink}" placeholder="Resume Link">
+                <input type="text" id="edit-github" class="modal-input" value="${portfolioData.hero.githubLink}" placeholder="GitHub Link">
+                <input type="text" id="edit-linkedin" class="modal-input" value="${portfolioData.hero.linkedinLink}" placeholder="LinkedIn Link">
+                <div class="file-upload">
+                    <input type="file" id="edit-photo" accept="image/*" onchange="previewImage(this, 'photo-preview')">
+                    <label for="edit-photo" class="file-upload-label">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                        Upload Profile Photo
+                    </label>
+                </div>
+                <img id="photo-preview" class="image-preview" src="${portfolioData.hero.profilePhoto}" alt="Preview" style="${portfolioData.hero.profilePhoto ? 'display: block;' : ''}">
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" onclick="hideModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveHero()">Save</button>
+                </div>
+            `);
+        }
+
+        function saveHero() {
+            portfolioData.hero.name = document.getElementById('edit-name').value;
+            portfolioData.hero.title = document.getElementById('edit-title').value;
+            portfolioData.hero.intro = document.getElementById('edit-intro').value;
+            portfolioData.hero.resumeLink = document.getElementById('edit-resume').value;
+            portfolioData.hero.githubLink = document.getElementById('edit-github').value;
+            portfolioData.hero.linkedinLink = document.getElementById('edit-linkedin').value;
+            const preview = document.getElementById('photo-preview');
+            if (preview.src && preview.style.display !== 'none') { portfolioData.hero.profilePhoto = preview.src; }
+            saveData(); renderHero(); hideModal();
+        }
+
+        // About Edit
+        function editAbout() {
+            showModal('Edit About Section', `
+                <textarea id="edit-about" class="modal-input modal-textarea" style="min-height: 180px;" placeholder="About text">${portfolioData.about}</textarea>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" onclick="hideModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveAbout()">Save</button>
+                </div>
+            `);
+        }
+
+        function saveAbout() {
+            portfolioData.about = document.getElementById('edit-about').value;
+            saveData(); renderAbout(); hideModal();
+        }
+
+        // Education Edit
+        function addEducation() {
+            showModal('Add Education', `
+                <select id="edit-edu-type" class="modal-input modal-select">
+                    <option value="school">School</option>
+                    <option value="college">University</option>
+                </select>
+                <input type="text" id="edit-edu-institution" class="modal-input" placeholder="Institution Name">
+                <div class="grades-editor">
+                    <h4>Details (Optional)</h4>
+                    <div id="grades-container"></div>
+                    <button class="btn btn-ghost btn-sm" onclick="addGradeField()">Add Detail</button>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" onclick="hideModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveNewEducation()">Add</button>
+                </div>
+            `);
+        }
+
+        function addGradeField() {
+            const container = document.getElementById('grades-container');
+            const div = document.createElement('div');
+            div.className = 'grade-entry';
+            div.innerHTML = `<input type="text" class="modal-input grade-label" placeholder="Label (e.g., CGPA)" style="flex: 1;"><input type="text" class="modal-input grade-value" placeholder="Value (e.g., 7.0)" style="flex: 1;">`;
+            container.appendChild(div);
+        }
+
+        function saveNewEducation() {
+            const edu = { id: nextId++, type: document.getElementById('edit-edu-type').value, institution: document.getElementById('edit-edu-institution').value, grades: [] };
+            document.querySelectorAll('.grade-entry').forEach(entry => {
+                const label = entry.querySelector('.grade-label').value;
+                const value = entry.querySelector('.grade-value').value;
+                if (label && value) { edu.grades.push({ label, value }); }
+            });
+            portfolioData.education.push(edu);
+            saveData(); renderEducation(); hideModal();
+        }
+
+        function editEducation(id) {
+            const edu = portfolioData.education.find(e => e.id === id);
+            if (!edu) return;
+            showModal('Edit Education', `
+                <select id="edit-edu-type" class="modal-input modal-select">
+                    <option value="school" ${edu.type === 'school' ? 'selected' : ''}>School</option>
+                    <option value="college" ${edu.type === 'college' ? 'selected' : ''}>University</option>
+                </select>
+                <input type="text" id="edit-edu-institution" class="modal-input" value="${edu.institution}" placeholder="Institution Name">
+                <div class="grades-editor">
+                    <h4>Details</h4>
+                    <div id="grades-container">
+                        ${edu.grades.map(g => `<div class="grade-entry"><input type="text" class="modal-input grade-label" value="${g.label}" placeholder="Label" style="flex: 1;"><input type="text" class="modal-input grade-value" value="${g.value}" placeholder="Value" style="flex: 1;"></div>`).join('')}
+                    </div>
+                    <button class="btn btn-ghost btn-sm" onclick="addGradeField()">Add Detail</button>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" onclick="hideModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveEducation(${id})">Save</button>
+                </div>
+            `);
+        }
+
+        function saveEducation(id) {
+            const edu = portfolioData.education.find(e => e.id === id);
+            if (!edu) return;
+            edu.type = document.getElementById('edit-edu-type').value;
+            edu.institution = document.getElementById('edit-edu-institution').value;
+            edu.grades = [];
+            document.querySelectorAll('.grade-entry').forEach(entry => {
+                const label = entry.querySelector('.grade-label').value;
+                const value = entry.querySelector('.grade-value').value;
+                if (label && value) { edu.grades.push({ label, value }); }
+            });
+            saveData(); renderEducation(); hideModal();
+        }
+
+        function deleteEducation(id) {
+            if (confirm('Delete this education entry?')) {
+                portfolioData.education = portfolioData.education.filter(e => e.id !== id);
+                saveData(); renderEducation();
+            }
+        }
+
+        // Skills Edit
+        function addSkill() {
+            const categories = Object.keys(portfolioData.skills);
+            showModal('Add Skill', `
+                <select id="edit-skill-category" class="modal-input modal-select">
+                    ${categories.map(cat => `<option value="${cat}">${portfolioData.skills[cat].title}</option>`).join('')}
+                </select>
+                <input type="text" id="edit-skill-name" class="modal-input" placeholder="Skill Name">
+                <input type="number" id="edit-skill-percentage" class="modal-input" placeholder="Percentage (0-100)" min="0" max="100">
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" onclick="hideModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveNewSkill()">Add</button>
+                </div>
+            `);
+        }
+
+        function saveNewSkill() {
+            const category = document.getElementById('edit-skill-category').value;
+            const skill = { id: nextId++, name: document.getElementById('edit-skill-name').value, percentage: Math.min(100, Math.max(0, parseInt(document.getElementById('edit-skill-percentage').value) || 0)) };
+            portfolioData.skills[category].items.push(skill);
+            saveData(); renderSkills(); hideModal();
+        }
+
+        function editSkill(category, id) {
+            const skill = portfolioData.skills[category].items.find(s => s.id === id);
+            if (!skill) return;
+            showModal('Edit Skill', `
+                <input type="text" id="edit-skill-name" class="modal-input" value="${skill.name}" placeholder="Skill Name">
+                <input type="number" id="edit-skill-percentage" class="modal-input" value="${skill.percentage}" placeholder="Percentage (0-100)" min="0" max="100">
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" onclick="hideModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveSkill('${category}', ${id})">Save</button>
+                </div>
+            `);
+        }
+
+        function saveSkill(category, id) {
+            const skill = portfolioData.skills[category].items.find(s => s.id === id);
+            if (!skill) return;
+            skill.name = document.getElementById('edit-skill-name').value;
+            skill.percentage = Math.min(100, Math.max(0, parseInt(document.getElementById('edit-skill-percentage').value) || 0));
+            saveData(); renderSkills(); hideModal();
+        }
+
+        function deleteSkill(category, id) {
+            if (confirm('Delete this skill?')) {
+                portfolioData.skills[category].items = portfolioData.skills[category].items.filter(s => s.id !== id);
+                saveData(); renderSkills();
+            }
+        }
+
+        // Projects Edit
+        function addProject() {
+            showModal('Add Project', `
+                <input type="text" id="edit-project-title" class="modal-input" placeholder="Project Title">
+                <textarea id="edit-project-desc" class="modal-input modal-textarea" placeholder="Description"></textarea>
+                <input type="text" id="edit-project-tech" class="modal-input" placeholder="Technologies (comma-separated)">
+                <input type="text" id="edit-project-github" class="modal-input" placeholder="GitHub Link">
+                <div class="file-upload">
+                    <input type="file" id="edit-project-image" accept="image/*" onchange="previewImage(this, 'project-preview')">
+                    <label for="edit-project-image" class="file-upload-label">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                        Upload Project Image
+                    </label>
+                </div>
+                <img id="project-preview" class="image-preview" alt="Preview">
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" onclick="hideModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveNewProject()">Add</button>
+                </div>
+            `);
+        }
+
+        function saveNewProject() {
+            const project = {
+                id: nextId++, title: document.getElementById('edit-project-title').value,
+                description: document.getElementById('edit-project-desc').value,
+                technologies: document.getElementById('edit-project-tech').value.split(',').map(t => t.trim()).filter(t => t),
+                githubLink: document.getElementById('edit-project-github').value, image: ''
+            };
+            const preview = document.getElementById('project-preview');
+            if (preview.src && preview.style.display !== 'none') { project.image = preview.src; }
+            portfolioData.projects.push(project);
+            saveData(); renderProjects(); hideModal();
+        }
+
+        function editProject(id) {
+            const project = portfolioData.projects.find(p => p.id === id);
+            if (!project) return;
+            showModal('Edit Project', `
+                <input type="text" id="edit-project-title" class="modal-input" value="${project.title}" placeholder="Project Title">
+                <textarea id="edit-project-desc" class="modal-input modal-textarea" placeholder="Description">${project.description}</textarea>
+                <input type="text" id="edit-project-tech" class="modal-input" value="${project.technologies.join(', ')}" placeholder="Technologies (comma-separated)">
+                <input type="text" id="edit-project-github" class="modal-input" value="${project.githubLink}" placeholder="GitHub Link">
+                <div class="file-upload">
+                    <input type="file" id="edit-project-image" accept="image/*" onchange="previewImage(this, 'project-preview')">
+                    <label for="edit-project-image" class="file-upload-label">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                        Upload Project Image
+                    </label>
+                </div>
+                <img id="project-preview" class="image-preview" src="${project.image}" alt="Preview" style="${project.image ? 'display: block;' : ''}">
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" onclick="hideModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveProject(${id})">Save</button>
+                </div>
+            `);
+        }
+
+        function saveProject(id) {
+            const project = portfolioData.projects.find(p => p.id === id);
+            if (!project) return;
+            project.title = document.getElementById('edit-project-title').value;
+            project.description = document.getElementById('edit-project-desc').value;
+            project.technologies = document.getElementById('edit-project-tech').value.split(',').map(t => t.trim()).filter(t => t);
+            project.githubLink = document.getElementById('edit-project-github').value;
+            const preview = document.getElementById('project-preview');
+            if (preview.src && preview.style.display !== 'none') { project.image = preview.src; }
+            saveData(); renderProjects(); hideModal();
+        }
+
+        function deleteProject(id) {
+            if (confirm('Delete this project?')) {
+                portfolioData.projects = portfolioData.projects.filter(p => p.id !== id);
+                saveData(); renderProjects();
+            }
+        }
+
+        // Achievements Edit
+        function addAchievement() {
+            showModal('Add Achievement', `
+                <input type="text" id="edit-achievement-title" class="modal-input" placeholder="Achievement Title">
+                <textarea id="edit-achievement-desc" class="modal-input modal-textarea" placeholder="Description"></textarea>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" onclick="hideModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveNewAchievement()">Add</button>
+                </div>
+            `);
+        }
+
+        function saveNewAchievement() {
+            const achievement = { id: nextId++, title: document.getElementById('edit-achievement-title').value, description: document.getElementById('edit-achievement-desc').value };
+            portfolioData.achievements.push(achievement);
+            saveData(); renderAchievements(); hideModal();
+        }
+
+        function editAchievement(id) {
+            const achievement = portfolioData.achievements.find(a => a.id === id);
+            if (!achievement) return;
+            showModal('Edit Achievement', `
+                <input type="text" id="edit-achievement-title" class="modal-input" value="${achievement.title}" placeholder="Achievement Title">
+                <textarea id="edit-achievement-desc" class="modal-input modal-textarea" placeholder="Description">${achievement.description}</textarea>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" onclick="hideModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveAchievement(${id})">Save</button>
+                </div>
+            `);
+        }
+
+        function saveAchievement(id) {
+            const achievement = portfolioData.achievements.find(a => a.id === id);
+            if (!achievement) return;
+            achievement.title = document.getElementById('edit-achievement-title').value;
+            achievement.description = document.getElementById('edit-achievement-desc').value;
+            saveData(); renderAchievements(); hideModal();
+        }
+
+        function deleteAchievement(id) {
+            if (confirm('Delete this achievement?')) {
+                portfolioData.achievements = portfolioData.achievements.filter(a => a.id !== id);
+                saveData(); renderAchievements();
+            }
+        }
+
+        // Contact Edit
+        function editContact() {
+            showModal('Edit Contact Info', `
+                <input type="text" id="edit-email" class="modal-input" value="${portfolioData.contact.email}" placeholder="Email">
+                <input type="text" id="edit-phone" class="modal-input" value="${portfolioData.contact.phone || ''}" placeholder="Phone">
+                <input type="text" id="edit-contact-github" class="modal-input" value="${portfolioData.contact.github}" placeholder="GitHub URL">
+                <input type="text" id="edit-contact-linkedin" class="modal-input" value="${portfolioData.contact.linkedin}" placeholder="LinkedIn URL">
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" onclick="hideModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveContact()">Save</button>
+                </div>
+            `);
+        }
+
+        function saveContact() {
+            portfolioData.contact.email = document.getElementById('edit-email').value;
+            portfolioData.contact.phone = document.getElementById('edit-phone').value;
+            portfolioData.contact.github = document.getElementById('edit-contact-github').value;
+            portfolioData.contact.linkedin = document.getElementById('edit-contact-linkedin').value;
+            saveData(); renderContact(); hideModal();
+        }
+
+        // Image Preview
+        function previewImage(input, previewId) {
+            const preview = document.getElementById(previewId);
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) { preview.src = e.target.result; preview.style.display = 'block'; };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function saveAllData() {
+            saveData();
+            alert('All changes saved successfully!');
+            document.getElementById('admin-menu').classList.remove('show');
+        }
+    </script>
+</body>
+</html>
