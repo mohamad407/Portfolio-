@@ -115,6 +115,11 @@
         .contact-item { display: flex; align-items: center; gap: 16px; padding: 18px 24px; border-radius: var(--radius-md); text-decoration: none; color: var(--fg-primary); transition: all 0.2s; margin-bottom: 12px; }
         .contact-item:hover { border-color: var(--accent); background: rgba(0, 170, 255, 0.05); }
         .contact-item svg { width: 24px; height: 24px; color: var(--accent); flex-shrink: 0; }
+         /* Hire Me!! */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1000px; margin: 0 auto; }
+        .contact-item { display: flex; align-items: center; gap: 16px; padding: 18px 24px; border-radius: var(--radius-md); text-decoration: none; color: var(--fg-primary); transition: all 0.2s; margin-bottom: 12px; }
+        .contact-item:hover { border-color: var(--accent); background: rgba(0, 170, 255, 0.05); }
+        .contact-item svg { width: 24px; height: 24px; color: var(--accent); flex-shrink: 0; }
 
         /* Admin/Edit UI */
         .edit-controls { display: none; position: absolute; top: 16px; right: 16px; gap: 8px; z-index: 10; }
@@ -165,6 +170,7 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
+                 <li><a href="#Hire Me!!">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -176,9 +182,9 @@
                     <div class="hero-badge">Available for opportunities</div>
                     <h1 class="hero-name" id="hero-name">Mohamad Asihf</h1>
                     <div class="hero-title" id="hero-title">MTech Software Engineering | VIT University</div>
-                    <p class="hero-intro" id="hero-intro">Passionate about building intelligent and secure systems using Java and modern technologies.</p>
+                    <p class="hero-intro" id="hero-intro">Passionate about building intelligent and secure systems using Java and moderntechnologies.</p>
                     <div class="hero-actions">
-                        <a href="#" class="btn btn-primary" id="resume-btn">Download Resume</a>
+                        <a href="https://asifresume.tiiny.site" class="btn btn-primary" id="resume-btn">Download Resume</a>
                     </div>
                     <div class="social-links">
                         <a href="#" class="social-link" id="github-link" aria-label="GitHub">
@@ -267,15 +273,7 @@
             </div>
         </div>
     </section>
-
-    <div class="admin-panel" id="admin-panel">
-        <div class="admin-menu" id="admin-menu">
-            <button class="btn btn-primary" onclick="saveAllData()" style="width: 100%;">Save Changes</button>
-            <button class="btn btn-danger" onclick="logout()" style="width: 100%;">Logout</button>
-        </div>
-        <button class="admin-fab" onclick="toggleAdminMenu()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"></path></svg></button>
-    </div>
-
+      
     <div class="modal-overlay" id="modal-overlay">
         <div class="modal" id="modal">
             <h2 id="modal-title">Modal Title</h2>
@@ -289,19 +287,20 @@
         
         // --- DEFAULT DATA ---
         const defaultData = {
-            hero: { name: 'Mohamad Asihf', title: 'MTech Software Engineering | VIT University', intro: 'Passionate about building intelligent and secure systems using Java and modern technologies.', resumeLink: '#', githubLink: 'https://github.com', linkedinLink: 'https://www.linkedin.com/in/mohamad-asihf-765a63320/', profilePhoto: '' },
-            about: 'I am Mohamad Asihf S, currently pursuing my Master of Technology (M.Tech Int) in Software Engineering at VIT University with a CGPA of 7.0. I specialize in Java backend development and have a keen interest in building intelligent systems using modern technologies like Spring Boot and AI integration.',
+            hero: { name: 'Mohamad Asihf', title: 'MTech Software Engineering | VIT University', intro: 'Passionate about building intelligent and secure systems using Javascript and modern technologies.', resumeLink: 'https://asifresume.tiiny.site', githubLink: 'https://github.com', linkedinLink: 'https://www.linkedin.com/in/mohamad-asihf-765a63320/', profilePhoto: 'https://kommodo.ai/i/aH6U2rSRktLuTMlrK2hp' },
+            about: 'I am Mohamad Asihf S, currently pursuing my Master of Technology (M.Tech Int) in Software Engineering at VIT University with a CGPA of 7.8. I specialize in AI-Fullstack-Development and have a keen interest in building intelligent systems using modern technologies like open-ai and AI integration.',
             education: [
-                { id: 1, type: 'college', institution: 'VIT University, Vellore', grades: [{ label: 'Degree', value: 'M.Tech Software Engineering' }, { label: 'CGPA', value: '7.0' }] },
+                { id: 1, type: 'college', institution: 'VIT University, Vellore', grades: [{ label: 'Degree', value: 'M.Tech Software Engineering' }, { label: 'CGPA', value: '7.8' }] },
                 { id: 2, type: 'school', institution: 'Vidya Mandir Matriculation Higher Secondary School', grades: [{ label: 'Grade 10', value: '75%' }, { label: 'Grade 12', value: '85%' }] }
             ],
             skills: {
-                programming: { title: 'Programming Languages', items: [{ id: 1, name: 'Java', percentage: 90 }, { id: 2, name: 'JavaScript', percentage: 80 }] },
-                backend: { title: 'Backend & Database', items: [{ id: 3, name: 'Spring Boot', percentage: 88 }, { id: 4, name: 'MongoDB', percentage: 82 }] }
+                programming: { title: 'Programming Languages', items: [{ id: 1, name: 'Java', percentage: 80 }, { id: 2, name: 'JavaScript', percentage: 80 }] },
+                backend: { title: 'Backend & Database', items: [{ id: 3, name: 'Node-js', percentage: 88 }, { id: 4, name: 'MongoDB', percentage: 82 }] }
+                 AI-Intergration: { title: 'AI & Chart-js', items: [{ id: 3, name: 'open-ai', percentage: 88 }, { id: 4, name: 'chart-js', percentage: 82 }] }
             },
             projects: [
-                { id: 1, title: 'Fire Extinguisher Monitoring App', description: 'Developed an intelligent monitoring system capable of continuously detecting the CO₂ level inside a fire extinguisher.', technologies: ['HTML', 'CSS', 'JavaScript', 'Spring', 'MongoDB'], githubLink: 'https://github.com', image: '' },
-                { id: 2, title: 'Smart Biometric Classroom System', description: 'An intelligent classroom automation system using biometric authentication.', technologies: ['Java', 'IoT', 'MySQL'], githubLink: 'https://github.com', image: '' }
+                { id: 1, title: 'Fire Extinguisher Monitoring App', description: 'Developed an intelligent monitoring system capable of continuously detecting the CO₂ level inside a fire extinguisher.', technologies: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'MongoDB'], githubLink: 'https://github.com', image: '' },
+                { id: 2, title: 'Cric-Rebels', description: 'An intelligent scoreboarding system for cricket', technologies: ['Javascript', 'MySQL'], githubLink: 'https://github.com', image: '' }
             ],
             contact: { email: 'asihfibrahim600@gmail.com', phone: '+91 9677988241', github: 'https://github.com', linkedin: 'https://www.linkedin.com/in/mohamad-asihf-765a63320/' }
         };
